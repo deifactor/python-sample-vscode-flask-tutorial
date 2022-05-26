@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "python-sample-vscode-flask-tutorial"
+version = "0.1.0"
+description = ""
+authors = ["Ash <ash@afreshtechnologies.com>"]
+readme = "README.md"
+packages = [{include = "hello_app"}]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

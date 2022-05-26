@@ -24,10 +24,11 @@ steps:
   inputs:
     artifactFeed: Afresh Test/yet-another-testing-feed
 - script: |
+     curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.2.0b1 python3 -
      pip install wheel
      pip install twine
 # Build the python distribution from source
 - script: |
-    python setup.py bdist_wheel
+    poetry build
 - script: |
-    python -m twine upload -r myTestFeed --config-file $(PYPIRC_PATH) dist/*.whl
+    python -m twine upload -r yet-another-testing-feed --config-file $(PYPIRC_PATH) dist/*.whl
