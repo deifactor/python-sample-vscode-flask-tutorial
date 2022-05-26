@@ -19,12 +19,15 @@ steps:
     versionSpec: '$(python.version)'
   displayName: 'Use Python $(python.version)'
 
+- script: 'pip install twine'
+- task: TwineAuthenticate@1
+  inputs:
+    artifactFeed: Afresh Test/yet-another-testing-feed
 - script: |
-    python -m pip install --upgrade pip
-    pip install -r requirements.txt
-  displayName: 'Install dependencies'
-
+     pip install wheel
+     pip install twine
+# Build the python distribution from source
 - script: |
-    pip install pytest pytest-azurepipelines
-    pytest
-  displayName: 'pytest'
+    python setup.py bdist_wheel
+- script: |
+    python -m twine upload -r myTestFeed --config-file $(PYPIRC_PATH) dist/*.whl
